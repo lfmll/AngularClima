@@ -9,9 +9,10 @@ import { CurrentWeatherService } from './services/current-weather.service';
 export class AppComponent {
   title = 'app';
 
-  constructor (private weather:CurrentWeatherService){}
+  constructor (private weatherService:CurrentWeatherService){}
 
   ngOnInit(){
-    this.weather.get();
+    this.weatherService.weather$.subscribe(console.log);
+    //this.weather.get();
   }
 }
