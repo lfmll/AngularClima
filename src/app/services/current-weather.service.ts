@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Subject, Observable} from 'rxjs';
 
@@ -20,7 +20,11 @@ export class CurrentWeatherService {
   }
   get(coords:Coords){
     let args:string=`?lat=${coords.lat}&lon=${coords.lon}&APPID=${environment.key}&units=metric`;
-    let Observable=this.http.get(this.endpoint+args).subscribe(this.weatherSubject);
+    let url=this.endpoint+args;
+    if(isDevMode()){
+      url='assets/weather.json';
+    }
+    //let Observable=this.http.get(this.endpoint+args).subscribe(this.weatherSubject);
     //this.http.get('assets/weather.json').subscribe(console.log);
   }
   //Subject
